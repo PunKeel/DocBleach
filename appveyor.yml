@@ -14,7 +14,10 @@ environment:
     secure: ATEri4q0jtlpP93k4+i1Q0dwKzP/QF7Jz8KceiPPQvaW5+7C5MfOUqd9JzQS9Ej9n/4yp0Kv0O3MfUxSD0xybX6RYHGB2H+KahM9vROyrhs2cKD6lAjT8+AuZSUeYrTC
 
 install:
-  - ps: Start-FileDownload '$JET_URL'
+  - ps: |
+        if(![System.IO.File]::Exists("jet-1130-std-en-windows-x86.exe")) {
+            Start-FileDownload "$JET_URL"
+        }
   - ps: .\jet-1130-std-en-windows-x86.exe -batch -no-aftrun -dest C:\jet\
   - cmd: SET JET_HOME=C:\jet\
 
@@ -27,15 +30,15 @@ cache:
   - .\jet-1130-std-en-windows-x86.exe
 
 artifacts:
-  - path: cli/target/jet/docbleach.exe
+  - path: cli\target\jet\docbleach.exe
     name: DocBleach_Setup.exe
 
-  - path: cli/target/jet/app/
+  - path: cli\target\jet\app\
     name: DocBleach_Standalone
     type: zip
 
 deploy:
   - provider: GitHub
     on: # release tags from branch jet-built branch only
-      branch: jet-built
+      branch: master
       appveyor_repo_tag: true
