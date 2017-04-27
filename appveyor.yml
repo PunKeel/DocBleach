@@ -15,8 +15,8 @@ environment:
 
 install:
   - ps: |
-        if(![System.IO.File]::Exists("jet-1130-std-en-windows-x86.exe")) {
-            Start-FileDownload "$JET_URL"
+        if(![System.IO.File]::Exists(".\jet-1130-std-en-windows-x86.exe")) {
+            Start-FileDownload "$Env:JET_URL"
         }
   - ps: .\jet-1130-std-en-windows-x86.exe -batch -no-aftrun -dest C:\jet\
   - cmd: SET JET_HOME=C:\jet\
