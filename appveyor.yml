@@ -36,6 +36,6 @@ artifacts:
 
 deploy:
   - provider: GitHub
-    on: # release tags from branch jet-built branch only
+    on: # store artifacts for tags only
       branch: master
       appveyor_repo_tag: true
