@@ -1,7 +1,7 @@
 version: '{build}'
 
-todo: skip_non_tags: true
-todo: skip_branch_with_pr: true
+skip_non_tags: true
+skip_branch_with_pr: true
 
 branches:
   only:
