@@ -9,8 +9,12 @@ branches:
 
 image: Visual Studio 2017
 
+environment:
+  JET_URL:
+    secure: ATEri4q0jtlpP93k4+i1Q0dwKzP/QF7Jz8KceiPPQvaW5+7C5MfOUqd9JzQS9Ej9n/4yp0Kv0O3MfUxSD0xybX6RYHGB2H+KahM9vROyrhs2cKD6lAjT8+AuZSUeYrTC
+
 install:
-  - ps: Start-FileDownload 'https://plik.root.gg/file/1q6ra6lPFLeLmDso/A72aklCi8bGn1gc7/jet-1130-std-en-windows-x86.exe'
+  - ps: Start-FileDownload '$JET_URL'
   - ps: .\jet-1130-std-en-windows-x86.exe -batch -no-aftrun -dest C:\jet\
   - cmd: SET JET_HOME=C:\jet\
 
