@@ -16,7 +16,7 @@ install:
   - cmd: SET JET_HOME=C:\jet\
 
 build_script:
-  - mvn clean package jet:build -pl cli --batch-mode -DskipTest
+  - mvn install jet:build -pl cli --batch-mode -DskipTest
 
 cache:
   - C:\Users\appveyor\.m2
