@@ -12,14 +12,14 @@ image: Visual Studio 2017
 install:
   - ps: Start-FileDownload 'https://plik.root.gg/file/1q6ra6lPFLeLmDso/A72aklCi8bGn1gc7/jet-1130-std-en-windows-x86.exe'
   - ps: .\jet-1130-std-en-windows-x86.exe -batch -no-aftrun -dest C:\jet\
-  - cmd: dir
   - cmd: SET JET_HOME=C:\jet\
 
 build_script:
-  - mvn install jet:build -pl cli --batch-mode -DskipTest
+  - mvn -pl cli -am --batch-mode -DskipTest clean install jet:build
 
 cache:
   - C:\Users\appveyor\.m2
+  - .\jet-1130-std-en-windows-x86.exe
 
 artifacts:
   - path: cli/target/jet/*.exe
