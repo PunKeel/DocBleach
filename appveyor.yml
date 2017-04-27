@@ -1,7 +1,7 @@
 version: '{build}'
 
-# todo: skip_non_tags: true
-# todo: skip_branch_with_pr: true
+todo: skip_non_tags: true
+todo: skip_branch_with_pr: true
 
 branches:
   only:
@@ -27,17 +27,15 @@ cache:
   - .\jet-1130-std-en-windows-x86.exe
 
 artifacts:
-  - path: cli/target/jet/*.exe
-    name: MyApp
+  - path: cli/target/jet/docbleach.exe
+    name: DocBleach_Setup.exe
 
-  - path: cli/target/jet/
-    name: Binary app
+  - path: cli/target/jet/app/
+    name: DocBleach_Standalone
     type: zip
 
-# tbd
-#deploy:
-#  - provider: GitHub
-#    artifact: 
-#    on:
-#      branch: master                # release from master branch only
-#      appveyor_repo_tag: true       # deploy on tag push only
+deploy:
+  - provider: GitHub
+    on: # release tags from branch jet-built branch only
+      branch: jet-built
+      appveyor_repo_tag: true
