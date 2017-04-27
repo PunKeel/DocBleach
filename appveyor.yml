@@ -14,7 +14,7 @@ environment:
     secure: ATEri4q0jtlpP93k4+i1Q0dwKzP/QF7Jz8KceiPPQvaW5+7C5MfOUqd9JzQS9Ej9n/4yp0Kv0O3MfUxSD0xybX6RYHGB2H+KahM9vROyrhs2cKD6lAjT8+AuZSUeYrTC
 
 install:
-  - if not exist "jet-1130-std-en-TESTwindows-x86.exe" appveyor DownloadFile "$JET_URL"
+  - if not exist "jet-1130-std-en-TESTwindows-x86.exe" appveyor DownloadFile "%JET_URL%"
   - ps: .\jet-1130-std-en-windows-x86.exe -batch -no-aftrun -dest C:\jet\
   - cmd: SET JET_HOME=C:\jet\
 
