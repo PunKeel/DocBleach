@@ -1,0 +1,38 @@
+version: '{build}'
+
+# todo: skip_non_tags: true
+# todo: skip_branch_with_pr: true
+
+branches:
+  only:
+    - master
+
+image: Visual Studio 2017
+
+install:
+  - ps: Start-FileDownload 'https://plik.root.gg/file/1q6ra6lPFLeLmDso/A72aklCi8bGn1gc7/jet-1130-std-en-windows-x86.exe'
+  - ps: .\jet-1130-std-en-windows-x86.exe -batch -no-aftrun -dest C:\jet\
+  - cmd: dir
+  - cmd: SET JET_HOME=C:\jet\
+
+build_script:
+  - mvn clean package jet:build -pl cli --batch-mode -DskipTest
+
+cache:
+  - C:\Users\appveyor\.m2
+
+artifacts:
+  - path: cli/target/jet/*.exe
+    name: MyApp
+
+  - path: cli/target/jet/
+    name: Binary app
+    type: zip
+
+# tbd
+#deploy:
+#  - provider: GitHub
+#    artifact: 
+#    on:
+#      branch: master                # release from master branch only
+#      appveyor_repo_tag: true       # deploy on tag push only
