@@ -1,5 +1,5 @@
 #!/bin/sh
-if [ -n "${TRAVIS_TAG}" ] || [ "${TRAVIS_PULL_REQUEST}" = "true" ]
+if [ -z "${TRAVIS_TAG}" ] || [ "${TRAVIS_PULL_REQUEST}" = "true" ]
   then
     echo "Skipping the Excelsior Jet build."
     return
