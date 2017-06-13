@@ -1,11 +1,11 @@
 version: '{build}'
 
-skip_non_tags: false
+skip_non_tags: true
 skip_branch_with_pr: true
 
 branches:
   only:
-    - jet-built
+    - master
 
 image: Visual Studio 2017
 
