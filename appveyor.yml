@@ -1,21 +1,21 @@
 version: '{build}'
 
-skip_non_tags: true
+skip_non_tags: false
 skip_branch_with_pr: true
 
 branches:
   only:
-    - master
+    - jet-built
 
 image: Visual Studio 2017
 
 environment:
   JET_URL:
-    secure: ATEri4q0jtlpP93k4+i1Q0dwKzP/QF7Jz8KceiPPQvaW5+7C5MfOUqd9JzQS9Ej9n/4yp0Kv0O3MfUxSD0xybX6RYHGB2H+KahM9vROyrhs2cKD6lAjT8+AuZSUeYrTC
+    secure: Nu2vAId9CWd0r8aes2mxYZ1PR3IkVSFvPAf9MZ2tUeGDY759Ho79TECbQohmRTiMhoUvwrt8Q3PIq+Il+yCE1w==
 
 install:
-  - if not exist "jet-1130-std-en-windows-x86.exe" appveyor DownloadFile "%JET_URL%"
-  - ps: .\jet-1130-std-en-windows-x86.exe -batch -no-aftrun -dest C:\jet\
+  - if not exist "jet-1130-pro-en-windows-x86.exe" appveyor DownloadFile "%JET_URL%"
+  - ps: .\jet-1130-pro-en-windows-x86.exe -batch -no-aftrun -dest C:\jet\
   - cmd: SET JET_HOME=C:\jet\
 
 build_script:
@@ -24,7 +24,7 @@ build_script:
 
 cache:
   - C:\Users\appveyor\.m2
-  - .\jet-1130-std-en-windows-x86.exe
+  - .\jet-1130-pro-en-windows-x86.exe
 
 artifacts:
   - path: cli\target\jet\docbleach.exe
