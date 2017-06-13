@@ -4,7 +4,7 @@ if [ -z "${TRAVIS_TAG}" ] || [ "${TRAVIS_PULL_REQUEST}" = "true" ]
     echo "Skipping the Excelsior Jet build."
     return
 fi
-if [ -n "${JET_URL}" ] || [ "${TRAVIS_PULL_REQUEST}" = "true" ]
+if [ -z "${JET_URL}" ]
   then
     echo "Unknown JET_URL variable, skipping build."
     return
