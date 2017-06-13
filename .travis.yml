@@ -9,7 +9,7 @@ addons:
     organization: "docbleach"
     token:
       secure: "ejEHtwUs4Zr0DT8uMbjXl4TiCo6bIMIVm5M6nyLyu+YUNY30TQgpNcJIDqabsHlLan6SMIZEnJ3XAOc6VqkrRDowvPPeXpSAmxcDMQrlvNyzzhBc/CTImXyZqHyjNMsivIdq+j4WQNfUpVAlPGmRacm0AokOsGj5ipo5ofYu5jc3O+6Dz8D77GjE5q91XbujmyoeLb56eF5dpT3AM7UKdStX3OS1RIBffpPuPxOqCuTSoBHIhjtpkmbNkoPMQqQsiC3QXcv604p+cVML3wOk2sDtzVH5EdLHqBFFPD9l36QBicbIXqgMVsSjw0C8fWcvue3S+p3cF3V9R/2NDXMdLV8Euc5Tu/abLNNQDcmlZAe0/Py89pHTtrPzzgixPXzrmxK7r9GckGjyQTypikKWKW3frLD6meDXt5LRSXfohKNHRfZ5hKW9xzVVKAtkRuNBhT1GSdELPXuT2rnzmzTkT/jIMp9HKOyz/TA81uZQM0L6i3W91m+UC8mI3hifh3EvWS1NAnukCtb9MJqXRNBpXhSk3Cf/G3H6m+Jo7c9Vd3o1lvXCsageHyTls9eJk8H3DOdUBazrg7MiqfRPsmvbv9gEoXwzUmLmH6Dj16XJquMvP7d/z/mlEjRoQDLPo6DoYFpVivRS1rBfoP7k8frR46bKqYjWe684mNX1w2zDfZY="
-
+    
 env:
   global:
    # COVERITY_SCAN_TOKEN
@@ -20,7 +20,11 @@ cache:
   - '$HOME/.m2'
   - '$HOME/.sonar/cache'
 
-script: mvn org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar com.srcclr:srcclr-maven-plugin:scan
+before_script: ./scripts/jet-before.sh
+
+script:
+  - mvn org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar com.srcclr:srcclr-maven-plugin:scan
+  - if [ -e jet-1130-pro-en-linux-x86.bin ] then mvn "-Djet.home=`pwd`/jet11.3-pro-x86/" jet:testrun jet:build; fi
 
 deploy:
   - provider: script
@@ -33,7 +37,9 @@ deploy:
     skip_cleanup: true
     api_key:
       secure: "qlyOP0Lg06ThcbsEgXW3qaZzS7eMmsZ4XRUVDsYXbnbZFDem46I7fPboZcAAp0g6AX79Kf/NpESfNShGgzoUZlbFkPp5ez/emi48jENv1H7HwDGS6b/rEcUo7V0ktrY3SfCeQhlwOqicMkCqDG8HT1zjK6odlvjSmSFgUcNG2fWsSmQUJkPZW2jzJaO3Ko37sgX/GIo/HgjL7N9Y7P/+/9PPdBV+rGcjLJAgLZgEQVS3OCd2XHPn6AWa0J7ieFn7JzYQXNT6iOfMVnrRsjsMuTLQKbclFgJb8SZfzJdrOaLY259JumSmGe5Y7SsuN2bRRmFt3H6yF46qptjlPz7ozJCuE4DozVowCjoY+U5ecvx6oMg5WFsFbAipaMWIe6LlZCajqN6RGgPeYwZlfIBbHmj3KGwXOrd3HCslL+D4ZDv/+9QfRriESgaJSSwI/IkT2thHDY+D7FTyRCmKY6S3jcxNGaFz4WRJeFTKMMq1vI0+wI41mRbOg7n5kaNdbCO4vXpBNC/Zhnv0DOD8Zhy/LyGnm9hlfJ10+SF6bxmdKdln9i49AdyaHzVDZCR1/X1lM6mfk1lryzj0jsYVNmYN7JhcsLiUGSY0zSrtSCMQmvajjuPPMFqWXFTj/Kz6aCCIlbsZQAHTntnQr21VMaWqa8JUJ3E6vJYZf1ZtKIy0mpk="
-    file: cli/target/docbleach.jar
+    file:
+      - cli/target/docbleach.jar
+      - cli/target/jet/docbleach.zip
     on:
       repo: docbleach/DocBleach
       tags: true
