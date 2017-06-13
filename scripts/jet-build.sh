@@ -13,3 +13,4 @@ fi
 wget -q --no-check-certificate -O jet-1130-pro-en-linux-x86.bin "${JET_URL}"
 chmod +x ./jet-1130-pro-en-linux-x86.bin
 ./jet-1130-pro-en-linux-x86.bin -batch -no-aftrun
+mvn "-Djet.home=`pwd`/jet11.3-pro-x86/" jet:testrun jet:build
