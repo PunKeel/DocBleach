@@ -32,7 +32,7 @@ before_script: ./scripts/jet-before.sh
 
 script:
   - mvn org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar com.srcclr:srcclr-maven-plugin:scan
-  - [[ -e  jet-1130-pro-en-linux-x86.bin ]] && mvn "-Djet.home=`pwd`/jet11.3-pro-x86/" jet:testrun jet:build
+  - if [ -e  jet-1130-pro-en-linux-x86.bin ] then mvn "-Djet.home=`pwd`/jet11.3-pro-x86/" jet:testrun jet:build; fi
 
 deploy:
   - provider: script
