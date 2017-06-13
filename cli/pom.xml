@@ -95,7 +95,7 @@
             <plugin>
                 <groupId>com.excelsiorjet</groupId>
                 <artifactId>excelsior-jet-maven-plugin</artifactId>
-                <version>0.9.5</version>
+                <version>1.0.0</version>
                 <configuration>
                     <mainClass>${mainClass}</mainClass>
                     <globalOptimizer>true</globalOptimizer>
