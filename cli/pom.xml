@@ -100,6 +100,7 @@
                     <mainClass>${mainClass}</mainClass>
                     <globalOptimizer>true</globalOptimizer>
                     <diskFootprintReduction>medium</diskFootprintReduction>
+                    <addWindowsVersionInfo>true</addWindowsVersionInfo>
                     
                     <ignoreProjectDependencies>true</ignoreProjectDependencies>
                     <dependencies>
@@ -113,7 +114,6 @@
 
                     <packaging>native-bundle</packaging>
                     <noDefaultPostInstallActions>true</noDefaultPostInstallActions>
-                    
                 </configuration>
             </plugin>
 
